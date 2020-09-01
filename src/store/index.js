@@ -7,7 +7,7 @@ const initialState = {
   currentPage: 1,
   error: null,
   totalResults: 0,
-  nominations: []
+  nominees: [],
 };
 
 const Store = ({ children }) => {

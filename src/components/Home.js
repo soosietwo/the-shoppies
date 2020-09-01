@@ -7,6 +7,7 @@ import {
   TextContainer,
   SkeletonDisplayText,
   SkeletonBodyText,
+  Banner,
 } from "@shopify/polaris";
 
 import SearchBar from "./SearchBar";
@@ -14,7 +15,7 @@ import MoviesList from "./MoviesList";
 import Pagination from "./Pagination";
 import Error from "./Error";
 import { Context } from "../store";
-import { NOMINATE_MOVIE } from "../store/constants";
+import { NOMINATE_MOVIE, REMOVE_NOMINEE } from "../store/constants";
 
 const Home = () => {
   const [state, dispatch] = useContext(Context);
@@ -23,10 +24,14 @@ const Home = () => {
     dispatch({ type: NOMINATE_MOVIE, payload: movie });
   };
 
+  const removeNominee = (movie) => {
+    dispatch({ type: REMOVE_NOMINEE, payload: movie });
+  };
+
   const isNominateButtonDisabled = (movie) => {
     return (
-      state.nominations.some((nominee) => movie.imdbID === nominee.imdbID) ||
-      state.nominations.length >= 5
+      state.nominees.some((nominee) => movie.imdbID === nominee.imdbID) ||
+      state.nominees.length >= 5
     );
   };
 
@@ -44,6 +49,9 @@ const Home = () => {
                 </TextContainer>
               </Card>
             )}
+            {state.nominees.length === 5 && (
+              <Banner status="success" title="All done!" />
+            )}
             {state.error ? (
               <Error title="Oops!" details={state.error} />
             ) : (
@@ -54,6 +62,7 @@ const Home = () => {
                 typePlural="movies"
                 action={nominateMovie}
                 disableAction={isNominateButtonDisabled}
+                actionText={"Nominate"}
               />
             )}
 
@@ -64,9 +73,11 @@ const Home = () => {
           <Card sectioned>
             <Heading element="h2">Nominees</Heading>
             <MoviesList
-              movies={state.nominations}
-              type="movie"
-              typePlural="movies"
+              movies={state.nominees}
+              type="nominee"
+              typePlural="nominees"
+              action={removeNominee}
+              actionText={"Remove"}
             />
           </Card>
         </Layout.Section>

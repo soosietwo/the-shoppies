@@ -8,7 +8,12 @@ import {
 } from "@shopify/polaris";
 
 const MovieCard = (props) => {
-  const { Title, Year, Poster, imdbID } = props.movie;
+  const {
+    disableAction,
+    actionText,
+    action,
+    movie: { Title, Year, Poster, imdbID },
+  } = props;
   const poster = (
     <img
       style={{ maxWidth: "100px" }}
@@ -26,12 +31,12 @@ const MovieCard = (props) => {
       <TextContainer>
         <Heading>{Title}</Heading>
         <Subheading>{Year}</Subheading>
-        {props.action && (
+        {action && (
           <Button
-            disabled={props.disableAction(props.movie)}
-            onClick={() => props.action(props.movie)}
+            disabled={disableAction && disableAction(props.movie)}
+            onClick={() => action(props.movie)}
           >
-            Nominate
+            {actionText}
           </Button>
         )}
       </TextContainer>

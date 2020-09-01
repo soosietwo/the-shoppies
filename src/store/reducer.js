@@ -4,7 +4,8 @@ import {
   FETCH_PREVIOUS,
   FETCH_MOVIES_SUCCESS,
   FETCH_MOVIES_FAILURE,
-  NOMINATE_MOVIE
+  NOMINATE_MOVIE,
+  REMOVE_NOMINEE,
 } from "./constants";
 
 const reducer = (state, action) => {
@@ -49,7 +50,14 @@ const reducer = (state, action) => {
     case NOMINATE_MOVIE:
       return {
         ...state,
-        nominations: [...state.nominations, action.payload],
+        nominees: [...state.nominees, action.payload],
+      };
+    case REMOVE_NOMINEE:
+      return {
+        ...state,
+        nominees: state.nominees.filter(
+          (nominee) => nominee.imdbID !== action.payload.imdbID
+        ),
       };
     default:
       return state;
