@@ -40,7 +40,6 @@ const Home = () => {
       <Layout>
         <Layout.Section>
           <Card sectioned>
-            <SearchBar />
             {state.isLoading && (
               <Card sectioned>
                 <TextContainer>

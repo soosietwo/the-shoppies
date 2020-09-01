@@ -1,12 +1,5 @@
-import React, { useCallback, useState, useContext } from "react";
-import {
-  Form,
-  FormLayout,
-  TextField,
-  Button,
-  Icon,
-  Stack,
-} from "@shopify/polaris";
+import React, { useCallback, useState, useContext, useEffect } from "react";
+import { TopBar } from "@shopify/polaris";
 import { SearchMajorMonotone } from "@shopify/polaris-icons";
 
 import api from "../api";
@@ -25,7 +18,13 @@ function SearchBar(props) {
   const handleSearchChange = useCallback((value) => setSearchTerm(value), []);
   const handleYearChange = useCallback((value) => setYear(value), []);
 
-  const handleSubmit = () => {
+  useEffect(() => {
+    if (searchTerm.trim().length) {
+      handleSearch();
+    }
+  }, [searchTerm]);
+
+  const handleSearch = () => {
     dispatch({ type: FETCH_MOVIES, searchTerm });
 
     api
@@ -44,39 +43,13 @@ function SearchBar(props) {
         dispatch({ type: FETCH_MOVIES_FAILURE, payload: error })
       );
   };
-
   return (
-    <Form onSubmit={handleSubmit}>
-      <FormLayout>
-        <Stack>
-          <Stack.Item fill>
-            <TextField
-              label="Search for a movie title"
-              labelHidden
-              fill
-              type="text"
-              value={searchTerm}
-              prefix={<Icon source={SearchMajorMonotone} />}
-              onChange={handleSearchChange}
-            />
-          </Stack.Item>
-          {/* <TextField
-          label="Year"
-          type="text"
-          value={year}
-          onChange={handleYearChange}
-        /> */}
-          <Button
-            primary
-            disabled={!searchTerm.trim().length}
-            loading={state.isLoading}
-            submit
-          >
-            Search movies
-          </Button>
-        </Stack>
-      </FormLayout>
-    </Form>
+    <TopBar.SearchField
+      onChange={handleSearchChange}
+      value={searchTerm}
+      placeholder="Search"
+      showFocusBorder
+    />
   );
 }
 
