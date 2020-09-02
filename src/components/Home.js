@@ -10,7 +10,6 @@ import {
   Banner,
 } from "@shopify/polaris";
 
-import SearchBar from "./SearchBar";
 import MoviesList from "./MoviesList";
 import Pagination from "./Pagination";
 import Error from "./Error";
@@ -51,7 +50,7 @@ const Home = () => {
             {state.nominees.length === 5 && (
               <Banner status="success" title="All done!" />
             )}
-            {state.error ? (
+            {state.error && !state.isLoading ? (
               <Error title="Oops!" details={state.error} />
             ) : (
               <MoviesList
@@ -64,7 +63,6 @@ const Home = () => {
                 actionText={"Nominate"}
               />
             )}
-
             {state.totalResults > 10 && <Pagination />}
           </Card>
         </Layout.Section>
