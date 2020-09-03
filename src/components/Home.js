@@ -42,42 +42,39 @@ const Home = () => {
       topBar={
         <Header
           toggleSheetActive={toggleSheetActive}
-          sheetActive={sheetActive}
+          nomineesCount={state.nominees.length}
         />
       }
     >
       <Page title="The Shoppies">
-        <Layout>
-          <Layout.Section>
+        <Card>
+          {state.isLoading && (
             <Card sectioned>
-              {state.isLoading && (
-                <Card sectioned>
-                  <TextContainer>
-                    <SkeletonDisplayText size="small" />
-                    <SkeletonBodyText />
-                  </TextContainer>
-                </Card>
-              )}
-              {state.nominees.length === 5 && (
-                <Banner status="success" title="All done!" />
-              )}
-              {state.error && !state.isLoading ? (
-                <Error title="Oops!" details={state.error} />
-              ) : (
-                <MoviesList
-                  movies={state.movies}
-                  totalResults={state.totalResults}
-                  type="movie"
-                  typePlural="movies"
-                  action={nominateMovie}
-                  disableAction={isNominateButtonDisabled}
-                  actionText={"Nominate"}
-                />
-              )}
-              {state.totalResults > 10 && <Pagination />}
+              <TextContainer>
+                <SkeletonDisplayText size="small" />
+                <SkeletonBodyText />
+              </TextContainer>
             </Card>
-          </Layout.Section>
-        </Layout>
+          )}
+          {state.nominees.length === 5 && (
+            <Banner status="success" title="All done!" />
+          )}
+          {state.error && !state.isLoading ? (
+            <Error title="Oops!" details={state.error} />
+          ) : (
+            <MoviesList
+              movies={state.movies}
+              totalResults={state.totalResults}
+              type="movie"
+              typePlural="movies"
+              action={nominateMovie}
+              disableAction={isNominateButtonDisabled}
+              actionText={"Nominate"}
+            />
+          )}
+          {state.totalResults > 10 && <Pagination />}
+        </Card>
+
         <Sidebar
           nominees={state.nominees}
           toggleSheetActive={toggleSheetActive}

@@ -40,7 +40,7 @@ const Sidebar = ({ nominees, toggleSheetActive, sheetActive }) => {
             plain
           />
         </div>
-        <Scrollable style={{ padding: "1.6rem", height: "100%" }}>
+        <Scrollable style={{ height: "100%" }}>
           <MoviesList
             movies={nominees}
             type="nominee"
@@ -61,7 +61,7 @@ const Sidebar = ({ nominees, toggleSheetActive, sheetActive }) => {
         >
           <Button onClick={toggleSheetActive}>Cancel</Button>
           <Button primary onClick={toggleSheetActive}>
-            Done
+            Submit Nominees
           </Button>
         </div>
       </div>
