@@ -1,31 +1,34 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { AppProvider } from "@shopify/polaris";
 import en from "@shopify/polaris/locales/en.json";
 import "@shopify/polaris/dist/styles.css";
 
-const theme = {
-  colors: {
-    topBar: {
-      background: "#357997",
-    },
-  },
-  logo: {
-    width: 124,
-    topBarSource:
-      "https://cdn.shopify.com/s/files/1/0446/6937/files/jaded-pixel-logo-color.svg?6215648040070010999",
-    url: "http://jadedpixel.com",
-    accessibilityLabel: "Jaded Pixel",
-  },
-};
+import { ApolloProvider } from "react-apollo";
+import { ApolloClient } from "apollo-client";
+import { createHttpLink } from "apollo-link-http";
+import { InMemoryCache } from "apollo-cache-inmemory";
+
+import "./assets/index.css";
+import App from "./App";
+import theme from "./assets/theme";
+
+const httpLink = createHttpLink({
+  uri: "http://localhost:4000",
+});
+
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache(),
+});
 
 ReactDOM.render(
   <React.StrictMode>
     <AppProvider i18n={en} theme={theme}>
-      <App />
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
     </AppProvider>
   </React.StrictMode>,
   document.getElementById("root")
