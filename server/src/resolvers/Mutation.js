@@ -4,6 +4,11 @@ const addNominee = (parent, args, context) => {
   });
 };
 
+const deleteNominee = (parent, args, context, info) => {
+  return context.prisma.deleteNominee({ id: args.id });
+};
+
 module.exports = {
   addNominee,
+  deleteNominee,
 };

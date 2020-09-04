@@ -6,14 +6,9 @@ import MovieCard from "./MovieCard";
 import EmptyState from "./EmptyState";
 import { NOMINEES_QUERY } from "./Sidebar";
 
-const REMOVE_NOMINEE_MUTATION = gql`
-  mutation REMOVE_NOMINEE_MUTATION(
-    $id: ID!
-    $title: String!
-    $poster: String!
-    $year: Int!
-  ) {
-    removeNominee(id: $id, title: $title, poster: $poster, year: $year) {
+const DELETE_NOMINEE_MUTATION = gql`
+  mutation DELETE_NOMINEE_MUTATION($id: ID!) {
+    deleteNominee(id: $id) {
       id
       title
       poster
@@ -23,10 +18,10 @@ const REMOVE_NOMINEE_MUTATION = gql`
 `;
 
 const NomineesList = (props) => {
-  const { movies, totalResults, type, typePlural, actionText } = props;
+  const { movies, totalResults } = props;
 
-  const [removeNominee, { loading, data, error }] = useMutation(
-    REMOVE_NOMINEE_MUTATION,
+  const [deleteNominee, { loading, data, error }] = useMutation(
+    DELETE_NOMINEE_MUTATION,
     {
       refetchQueries: [{ query: NOMINEES_QUERY }],
     }
@@ -41,7 +36,7 @@ const NomineesList = (props) => {
         <MovieCard
           movie={movie}
           action={() => {
-            removeNominee({ variables: { id: movie.id } });
+            deleteNominee({ variables: { id: movie.id } });
           }}
           actionText="Remove"
         />

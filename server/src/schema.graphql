@@ -11,4 +11,5 @@ type Query {
 
 type Mutation {
   addNominee(id: ID!, title: String!, poster: String, year: Int!): Nominee!
+  deleteNominee(id: ID!): Nominee!
 }
