@@ -5,6 +5,7 @@ import { gql, useMutation } from "@apollo/client";
 import MovieCard from "./MovieCard";
 import EmptyState from "./EmptyState";
 import { NOMINEES_QUERY } from "./Sidebar";
+import { NOMINEES_CONNECTION_QUERY } from "./Header";
 
 const ADD_NOMINEE_MUTATION = gql`
   mutation ADD_NOMINEE_MUTATION(
@@ -28,7 +29,10 @@ const MoviesList = (props) => {
   const [addNominee, { loading, data, error }] = useMutation(
     ADD_NOMINEE_MUTATION,
     {
-      refetchQueries: [{ query: NOMINEES_QUERY }],
+      refetchQueries: [
+        { query: NOMINEES_QUERY },
+        { query: NOMINEES_CONNECTION_QUERY },
+      ],
     }
   );
 

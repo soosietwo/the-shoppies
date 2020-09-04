@@ -1,3 +1,25 @@
+type NomineeConnection {
+  pageInfo: PageInfo!
+  edges: [NomineeEdge]!
+  aggregate: AggregateNominee!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type NomineeEdge {
+  node: Nominee!
+  cursor: String!
+}
+
+type AggregateNominee {
+  count: Int!
+}
+
 type Nominee {
   id: ID!
   title: String!
@@ -7,6 +29,7 @@ type Nominee {
 
 type Query {
   nominees: [Nominee]!
+  nomineesConnection: NomineeConnection!
 }
 
 type Mutation {

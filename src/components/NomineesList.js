@@ -5,6 +5,7 @@ import { gql, useMutation } from "@apollo/client";
 import MovieCard from "./MovieCard";
 import EmptyState from "./EmptyState";
 import { NOMINEES_QUERY } from "./Sidebar";
+import { NOMINEES_CONNECTION_QUERY } from "./Header";
 
 const DELETE_NOMINEE_MUTATION = gql`
   mutation DELETE_NOMINEE_MUTATION($id: ID!) {
@@ -23,7 +24,10 @@ const NomineesList = (props) => {
   const [deleteNominee, { loading, data, error }] = useMutation(
     DELETE_NOMINEE_MUTATION,
     {
-      refetchQueries: [{ query: NOMINEES_QUERY }],
+      refetchQueries: [
+        { query: NOMINEES_QUERY },
+        { query: NOMINEES_CONNECTION_QUERY },
+      ],
     }
   );
 
