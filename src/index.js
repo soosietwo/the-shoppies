@@ -5,21 +5,22 @@ import { AppProvider } from "@shopify/polaris";
 import en from "@shopify/polaris/locales/en.json";
 import "@shopify/polaris/dist/styles.css";
 
-import { ApolloProvider } from "react-apollo";
-import { ApolloClient } from "apollo-client";
-import { createHttpLink } from "apollo-link-http";
-import { InMemoryCache } from "apollo-cache-inmemory";
-
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
 import "./assets/index.css";
 import App from "./App";
 import theme from "./assets/theme";
 
-const httpLink = createHttpLink({
-  uri: "http://localhost:4000",
+const link = createHttpLink({
+  uri: "http://localhost:4000/",
 });
 
 const client = new ApolloClient({
-  link: httpLink,
+  link,
   cache: new InMemoryCache(),
 });
 

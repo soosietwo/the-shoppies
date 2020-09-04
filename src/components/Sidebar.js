@@ -1,17 +1,25 @@
 import React, { useContext } from "react";
 import { Sheet, Heading, Button, Scrollable } from "@shopify/polaris";
 import { MobileCancelMajorMonotone } from "@shopify/polaris-icons";
+import { gql, useQuery } from "@apollo/client";
 
 import MoviesList from "./MoviesList";
 import { Context } from "../store";
 import { REMOVE_NOMINEE } from "../store/constants";
 
-const Sidebar = ({ nominees, toggleSheetActive, sheetActive }) => {
-  const [state, dispatch] = useContext(Context);
+export const NOMINEES_QUERY = gql`
+  query NOMINEES_QUERY {
+    nominees {
+      id
+      title
+      poster
+      year
+    }
+  }
+`;
 
-  const removeNominee = (movie) => {
-    dispatch({ type: REMOVE_NOMINEE, payload: movie });
-  };
+const Sidebar = ({ nominees, toggleSheetActive, sheetActive }) => {
+  const { loading, error, data } = useQuery(NOMINEES_QUERY);
 
   return (
     <Sheet open={sheetActive}>
@@ -40,15 +48,19 @@ const Sidebar = ({ nominees, toggleSheetActive, sheetActive }) => {
             plain
           />
         </div>
-        <Scrollable style={{ height: "100%" }}>
-          <MoviesList
-            movies={nominees}
-            type="nominee"
-            typePlural="nominees"
-            action={removeNominee}
-            actionText={"Remove"}
-          />
-        </Scrollable>
+        {loading ? (
+          <p>loading...</p>
+        ) : (
+          <Scrollable style={{ height: "100%" }}>
+            <MoviesList
+              movies={data.nominees}
+              type="nominee"
+              typePlural="nominees"
+              // action={removeNominee}
+              actionText={"Remove"}
+            />
+          </Scrollable>
+        )}
         <div
           style={{
             alignItems: "center",

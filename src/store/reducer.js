@@ -8,6 +8,13 @@ import {
   REMOVE_NOMINEE,
 } from "./constants";
 
+const transformMovie = ({ imdbID, Poster, Year, Title }) => ({
+  id: imdbID,
+  poster: Poster,
+  year: Number(Year),
+  title: Title,
+});
+
 const reducer = (state, action) => {
   switch (action.type) {
     case FETCH_MOVIES:
@@ -37,7 +44,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         isLoading: false,
-        movies: action.payload.Search,
+        movies: action.payload.Search.map(transformMovie),
         totalResults: Number(action.payload.totalResults),
       };
     case FETCH_MOVIES_FAILURE:

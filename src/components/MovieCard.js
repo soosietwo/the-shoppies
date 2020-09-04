@@ -6,35 +6,72 @@ import {
   ResourceItem,
   TextContainer,
 } from "@shopify/polaris";
+import { gql, useMutation } from "@apollo/client";
+
+import { NOMINEES_QUERY } from "./Sidebar";
+
+const ADD_NOMINEE_MUTATION = gql`
+  mutation ADD_NOMINEE_MUTATION(
+    $id: ID!
+    $title: String!
+    $poster: String!
+    $year: Int!
+  ) {
+    addNominee(id: $id, title: $title, poster: $poster, year: $year) {
+      id
+      title
+      poster
+      year
+    }
+  }
+`;
 
 const MovieCard = (props) => {
   const {
     disableAction,
     actionText,
     action,
-    movie: { Title, Year, Poster, imdbID },
+    movie: { title, year, poster, id },
   } = props;
-  const poster = (
+
+  const posterMarkup = (
     <img
       style={{ maxWidth: "100px" }}
-      src={Poster}
-      alt={`Poster for ${Title}`}
+      src={poster}
+      alt={`Poster for ${title}`}
     />
   );
 
+  const [
+    addNominee,
+    { loading, data, error },
+  ] = useMutation(ADD_NOMINEE_MUTATION, {
+    refetchQueries: [{ query: NOMINEES_QUERY }],
+  });
+
   return (
     <ResourceItem
-      id={imdbID}
-      media={poster}
-      accessibilityLabel={`View details for ${Title}`}
+      id={id}
+      media={posterMarkup}
+      accessibilityLabel={`View details for ${title}`}
     >
       <TextContainer>
-        <Heading>{Title}</Heading>
-        <Subheading>{Year}</Subheading>
+        <Heading>{title}</Heading>
+        <Subheading>{year}</Subheading>
+
         {action && (
           <Button
             disabled={disableAction && disableAction(props.movie)}
-            onClick={() => action(props.movie)}
+            onClick={() => {
+              const variables = {
+                id,
+                poster,
+                year,
+                title,
+              };
+
+              addNominee({ variables });
+            }}
           >
             {actionText}
           </Button>
