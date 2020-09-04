@@ -6,25 +6,6 @@ import {
   ResourceItem,
   TextContainer,
 } from "@shopify/polaris";
-import { gql, useMutation } from "@apollo/client";
-
-import { NOMINEES_QUERY } from "./Sidebar";
-
-const ADD_NOMINEE_MUTATION = gql`
-  mutation ADD_NOMINEE_MUTATION(
-    $id: ID!
-    $title: String!
-    $poster: String!
-    $year: Int!
-  ) {
-    addNominee(id: $id, title: $title, poster: $poster, year: $year) {
-      id
-      title
-      poster
-      year
-    }
-  }
-`;
 
 const MovieCard = (props) => {
   const {
@@ -42,13 +23,6 @@ const MovieCard = (props) => {
     />
   );
 
-  const [
-    addNominee,
-    { loading, data, error },
-  ] = useMutation(ADD_NOMINEE_MUTATION, {
-    refetchQueries: [{ query: NOMINEES_QUERY }],
-  });
-
   return (
     <ResourceItem
       id={id}
@@ -62,16 +36,7 @@ const MovieCard = (props) => {
         {action && (
           <Button
             disabled={disableAction && disableAction(props.movie)}
-            onClick={() => {
-              const variables = {
-                id,
-                poster,
-                year,
-                title,
-              };
-
-              addNominee({ variables });
-            }}
+            onClick={action}
           >
             {actionText}
           </Button>

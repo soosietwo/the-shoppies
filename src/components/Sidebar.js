@@ -3,9 +3,7 @@ import { Sheet, Heading, Button, Scrollable } from "@shopify/polaris";
 import { MobileCancelMajorMonotone } from "@shopify/polaris-icons";
 import { gql, useQuery } from "@apollo/client";
 
-import MoviesList from "./MoviesList";
-import { Context } from "../store";
-import { REMOVE_NOMINEE } from "../store/constants";
+import NomineesList from "./NomineesList";
 
 export const NOMINEES_QUERY = gql`
   query NOMINEES_QUERY {
@@ -18,7 +16,7 @@ export const NOMINEES_QUERY = gql`
   }
 `;
 
-const Sidebar = ({ nominees, toggleSheetActive, sheetActive }) => {
+const Sidebar = ({ toggleSheetActive, sheetActive }) => {
   const { loading, error, data } = useQuery(NOMINEES_QUERY);
 
   return (
@@ -52,13 +50,7 @@ const Sidebar = ({ nominees, toggleSheetActive, sheetActive }) => {
           <p>loading...</p>
         ) : (
           <Scrollable style={{ height: "100%" }}>
-            <MoviesList
-              movies={data.nominees}
-              type="nominee"
-              typePlural="nominees"
-              // action={removeNominee}
-              actionText={"Remove"}
-            />
+            <NomineesList movies={data.nominees} />
           </Scrollable>
         )}
         <div

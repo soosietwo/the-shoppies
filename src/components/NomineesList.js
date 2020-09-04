@@ -6,14 +6,14 @@ import MovieCard from "./MovieCard";
 import EmptyState from "./EmptyState";
 import { NOMINEES_QUERY } from "./Sidebar";
 
-const ADD_NOMINEE_MUTATION = gql`
-  mutation ADD_NOMINEE_MUTATION(
+const REMOVE_NOMINEE_MUTATION = gql`
+  mutation REMOVE_NOMINEE_MUTATION(
     $id: ID!
     $title: String!
     $poster: String!
     $year: Int!
   ) {
-    addNominee(id: $id, title: $title, poster: $poster, year: $year) {
+    removeNominee(id: $id, title: $title, poster: $poster, year: $year) {
       id
       title
       poster
@@ -22,11 +22,11 @@ const ADD_NOMINEE_MUTATION = gql`
   }
 `;
 
-const MoviesList = (props) => {
-  const { movies, totalResults } = props;
+const NomineesList = (props) => {
+  const { movies, totalResults, type, typePlural, actionText } = props;
 
-  const [addNominee, { loading, data, error }] = useMutation(
-    ADD_NOMINEE_MUTATION,
+  const [removeNominee, { loading, data, error }] = useMutation(
+    REMOVE_NOMINEE_MUTATION,
     {
       refetchQueries: [{ query: NOMINEES_QUERY }],
     }
@@ -35,16 +35,15 @@ const MoviesList = (props) => {
   return (
     <ResourceList
       emptyState={<EmptyState movies={movies} />}
-      resourceName={{ singular: "movie", plural: "movies" }}
+      resourceName={{ singular: "nominee", plural: "nominees" }}
       items={movies}
       renderItem={(movie) => (
         <MovieCard
           movie={movie}
           action={() => {
-            addNominee({ variables: { ...movie } });
+            removeNominee({ variables: { id: movie.id } });
           }}
-          // disableAction={disableAction}
-          actionText="Nominate"
+          actionText="Remove"
         />
       )}
       showHeader
@@ -53,4 +52,4 @@ const MoviesList = (props) => {
   );
 };
 
-export default MoviesList;
+export default NomineesList;

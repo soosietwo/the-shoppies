@@ -19,22 +19,11 @@ import { NOMINATE_MOVIE } from "../store/constants";
 
 const Home = () => {
   const [state, dispatch] = useContext(Context);
-  const nominateMovie = (movie) => {
-    dispatch({ type: NOMINATE_MOVIE, payload: movie });
-  };
-
   const [sheetActive, setSheetActive] = useState(false);
   const toggleSheetActive = useCallback(
     () => setSheetActive((sheetActive) => !sheetActive),
     []
   );
-
-  const isNominateButtonDisabled = (movie) => {
-    return (
-      state.nominees.some((nominee) => movie.imdbID === nominee.imdbID) ||
-      state.nominees.length >= 5
-    );
-  };
 
   return (
     <Frame
@@ -64,11 +53,6 @@ const Home = () => {
             <MoviesList
               movies={state.movies}
               totalResults={state.totalResults}
-              type="movie"
-              typePlural="movies"
-              action={nominateMovie}
-              disableAction={isNominateButtonDisabled}
-              actionText={"Nominate"}
             />
           )}
           {state.totalResults > 10 && <Pagination />}
