@@ -1,19 +1,17 @@
 import React from "react";
 import { ResourceList } from "@shopify/polaris";
 
-import MovieCard from "./MovieCard";
 import EmptyState from "./EmptyState";
 
 const MoviesList = (props) => {
-  const { movies, totalResults } = props;
+  const { movies, totalResults, singular, plural, renderItem } = props;
 
   return (
     <ResourceList
       emptyState={<EmptyState movies={movies} />}
-      resourceName={{ singular: "movie", plural: "movies" }}
+      resourceName={{ singular, plural }}
       items={movies}
-      renderItem={(movie) => <MovieCard movie={movie} />}
-      showHeader
+      renderItem={(movie) => renderItem(movie)}
       totalItemsCount={totalResults}
     />
   );

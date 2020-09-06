@@ -1,21 +1,14 @@
 import React, { useContext, useCallback, useState } from "react";
-import {
-  Page,
-  Card,
-  TextContainer,
-  SkeletonDisplayText,
-  SkeletonBodyText,
-  Frame,
-  Banner,
-} from "@shopify/polaris";
+import { Page, Card, Frame, Banner } from "@shopify/polaris";
 
 import MoviesList from "./MoviesList";
 import Pagination from "./Pagination";
+import Loader from "./Loader";
 import Error from "./Error";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
+import MovieCard from "./MovieCard";
 import { Context } from "../store";
-import { NOMINATE_MOVIE } from "../store/constants";
 
 const Home = () => {
   const [state, dispatch] = useContext(Context);
@@ -36,14 +29,7 @@ const Home = () => {
     >
       <Page title="The Shoppies">
         <Card>
-          {state.isLoading && (
-            <Card sectioned>
-              <TextContainer>
-                <SkeletonDisplayText size="small" />
-                <SkeletonBodyText />
-              </TextContainer>
-            </Card>
-          )}
+          {state.isLoading && <Loader count={10} />}
           {state.nominees.length === 5 && (
             <Banner status="success" title="All done!" />
           )}
@@ -51,8 +37,11 @@ const Home = () => {
             <Error title="Oops!" details={state.error} />
           ) : (
             <MoviesList
+              singular="movie"
+              plural="movies"
               movies={state.movies}
               totalResults={state.totalResults}
+              renderItem={(movie) => <MovieCard movie={movie} />}
             />
           )}
           {state.totalResults > 10 && <Pagination />}

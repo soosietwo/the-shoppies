@@ -3,7 +3,8 @@ import { Sheet, Heading, Button, Scrollable } from "@shopify/polaris";
 import { MobileCancelMajorMonotone } from "@shopify/polaris-icons";
 import { gql, useQuery } from "@apollo/client";
 
-import NomineesList from "./NomineesList";
+import MoviesList from "./MoviesList";
+import NomineeCard from "./NomineeCard";
 
 export const NOMINEES_QUERY = gql`
   query NOMINEES_QUERY {
@@ -50,7 +51,13 @@ const Sidebar = ({ toggleSheetActive, sheetActive }) => {
           <p>loading...</p>
         ) : (
           <Scrollable style={{ height: "100%" }}>
-            <NomineesList movies={data.nominees} />
+            <MoviesList
+              singular="nominee"
+              plural="nominees"
+              movies={data.nominees}
+              // totalResults={totalResults}
+              renderItem={(movie) => <NomineeCard movie={movie} />}
+            />
           </Scrollable>
         )}
         <div
