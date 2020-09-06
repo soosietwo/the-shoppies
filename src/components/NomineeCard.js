@@ -50,11 +50,13 @@ const MovieCard = (props) => {
       id={id}
       media={posterMarkup}
       accessibilityLabel={`View details for ${title}`}
+      verticalAlignment="center"
     >
       <TextContainer>
         <Heading>{title}</Heading>
         <Subheading>{year}</Subheading>
         <Button
+          destructive
           disabled={loading}
           onClick={() => deleteNominee({ variables: { id } })}
         >

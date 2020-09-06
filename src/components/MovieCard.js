@@ -34,18 +34,8 @@ const MovieCard = (props) => {
 
   const [isNominated, setIsNominated] = useState(false);
 
-  const client = useApolloClient();
-  const { nominees } = client.readQuery({
-    query: gql`
-      query NOMINEES_QUERY {
-        nominees {
-          id
-          title
-          poster
-          year
-        }
-      }
-    `,
+  const { nominees } = useApolloClient().readQuery({
+    query: NOMINEES_QUERY,
   });
 
   useEffect(() => {
@@ -80,6 +70,8 @@ const MovieCard = (props) => {
       id={id}
       media={posterMarkup}
       accessibilityLabel={`View details for ${title}`}
+      className="nominated"
+      verticalAlignment="center"
     >
       <TextContainer>
         <Heading>{title}</Heading>
@@ -88,7 +80,7 @@ const MovieCard = (props) => {
           disabled={loading || isNominated}
           onClick={() => addNominee({ variables: { title, year, poster, id } })}
         >
-          {loading ? "Adding..." : isNominated ? "Nominated" : "Add nominee"}
+          {loading ? "Adding..." : isNominated ? "Nominated!" : "Add nominee"}
         </Button>
       </TextContainer>
     </ResourceItem>
