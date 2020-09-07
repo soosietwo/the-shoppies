@@ -45,9 +45,9 @@ const MovieCard = (props) => {
       update(cache, { data: { deleteNominee } }) {
         cache.modify({
           fields: {
-            nominees(existingNominees = []) {
+            nominees(existingNominees = [], { readField }) {
               return [...existingNominees].filter(
-                (nominee) => nominee.id !== deleteNominee.id
+                (nomineeRef) => readField("id", nomineeRef) !== deleteNominee.id
               );
             },
           },
