@@ -16,6 +16,12 @@ type NomineeEdge {
   cursor: String!
 }
 
+type BatchPayload {
+  count: Long!
+}
+
+scalar Long
+
 type AggregateNominee {
   count: Int!
 }
@@ -35,4 +41,5 @@ type Query {
 type Mutation {
   addNominee(id: ID!, title: String!, poster: String, year: Int!): Nominee!
   deleteNominee(id: ID!): Nominee!
+  deleteAllNominees: BatchPayload!
 }
