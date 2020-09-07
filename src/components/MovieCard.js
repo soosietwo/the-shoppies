@@ -8,7 +8,7 @@ import {
 } from "@shopify/polaris";
 import { gql, useMutation, useApolloClient } from "@apollo/client";
 
-import { NOMINEES_QUERY } from "./Sidebar";
+import { NOMINEES_QUERY } from "./Home";
 import { NOMINEES_CONNECTION_QUERY } from "./Header";
 
 const ADD_NOMINEE_MUTATION = gql`
@@ -30,6 +30,7 @@ const ADD_NOMINEE_MUTATION = gql`
 const MovieCard = (props) => {
   const {
     movie: { title, year, poster, id },
+    nomineesCount,
   } = props;
 
   const [isNominated, setIsNominated] = useState(false);
@@ -42,7 +43,7 @@ const MovieCard = (props) => {
     if (nominees.some((nominee) => nominee.id === id)) {
       setIsNominated(true);
     }
-  }, [nominees]);
+  }, [nominees, id]);
 
   const posterMarkup = (
     <img
@@ -59,8 +60,25 @@ const MovieCard = (props) => {
         { query: NOMINEES_QUERY },
         { query: NOMINEES_CONNECTION_QUERY },
       ],
-      update: (store, { data }) => {
-        setIsNominated(data.addNominee.id === id);
+      update(cache, { data: { addNominee } }) {
+        cache.modify({
+          fields: {
+            nominees(existingNominees = []) {
+              const newNomineeRef = cache.writeFragment({
+                data: addNominee,
+                fragment: gql`
+                  fragment NewNominee on Todo {
+                    id
+                    title
+                    year
+                    poster
+                  }
+                `,
+              });
+              return [...existingNominees, newNomineeRef];
+            },
+          },
+        });
       },
     }
   );
@@ -77,7 +95,7 @@ const MovieCard = (props) => {
         <Heading>{title}</Heading>
         <Subheading>{year}</Subheading>
         <Button
-          disabled={loading || isNominated}
+          disabled={loading || isNominated || nomineesCount >= 5}
           onClick={() => addNominee({ variables: { title, year, poster, id } })}
         >
           {loading ? "Adding..." : isNominated ? "Nominated!" : "Add nominee"}

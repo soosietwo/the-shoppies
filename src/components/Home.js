@@ -1,5 +1,6 @@
 import React, { useContext, useCallback, useState } from "react";
 import { Page, Card, Frame, Banner } from "@shopify/polaris";
+import { gql, useQuery } from "@apollo/client";
 
 import MoviesList from "./MoviesList";
 import Pagination from "./Pagination";
@@ -10,6 +11,17 @@ import Header from "./Header";
 import MovieCard from "./MovieCard";
 import { Context } from "../store";
 
+export const NOMINEES_QUERY = gql`
+  query NOMINEES_QUERY {
+    nominees {
+      id
+      title
+      poster
+      year
+    }
+  }
+`;
+
 const Home = () => {
   const [state, dispatch] = useContext(Context);
   const [sheetActive, setSheetActive] = useState(false);
@@ -18,20 +30,24 @@ const Home = () => {
     []
   );
 
+  const { loading, error, data } = useQuery(NOMINEES_QUERY);
+
   return (
-    <Frame
-      topBar={
-        <Header
-          toggleSheetActive={toggleSheetActive}
-          nomineesCount={state.nominees.length}
-        />
-      }
-    >
+    <Frame topBar={<Header toggleSheetActive={toggleSheetActive} />}>
       <Page title="The Shoppies">
         <Card>
-          {state.isLoading && <Loader count={10} />}
-          {state.nominees.length === 5 && (
-            <Banner status="success" title="All done!" />
+          {(state.isLoading || loading) && <Loader count={10} />}
+          {data && data.nominees.length === 5 && (
+            <Banner
+              status="success"
+              title="All done!"
+              action={{
+                content: "Go to nominees",
+                onAction: () => toggleSheetActive(true),
+              }}
+            >
+              <p>You have chosen 5 nominees. Submit or modify them now.</p>
+            </Banner>
           )}
           {state.error && !state.isLoading ? (
             <Error title="Oops!" details={state.error} />
@@ -41,14 +57,19 @@ const Home = () => {
               plural="movies"
               movies={state.movies}
               totalResults={state.totalResults}
-              renderItem={(movie) => <MovieCard movie={movie} />}
+              renderItem={(movie) => (
+                <MovieCard
+                  movie={movie}
+                  nomineesCount={data && data.nominees.length}
+                />
+              )}
             />
           )}
           {state.totalResults > 10 && <Pagination />}
         </Card>
 
         <Sidebar
-          nominees={state.nominees}
+          nominees={data && data.nominees}
           toggleSheetActive={toggleSheetActive}
           sheetActive={sheetActive}
         />

@@ -1,25 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Sheet, Heading, Button, Scrollable } from "@shopify/polaris";
 import { MobileCancelMajorMonotone } from "@shopify/polaris-icons";
-import { gql, useQuery } from "@apollo/client";
 
 import MoviesList from "./MoviesList";
 import NomineeCard from "./NomineeCard";
 
-export const NOMINEES_QUERY = gql`
-  query NOMINEES_QUERY {
-    nominees {
-      id
-      title
-      poster
-      year
-    }
-  }
-`;
-
-const Sidebar = ({ toggleSheetActive, sheetActive }) => {
-  const { loading, error, data } = useQuery(NOMINEES_QUERY);
-
+const Sidebar = ({ toggleSheetActive, sheetActive, nominees }) => {
   return (
     <Sheet open={sheetActive}>
       <div
@@ -47,19 +33,14 @@ const Sidebar = ({ toggleSheetActive, sheetActive }) => {
             plain
           />
         </div>
-        {loading ? (
-          <p>loading...</p>
-        ) : (
-          <Scrollable style={{ height: "100%" }}>
-            <MoviesList
-              singular="nominee"
-              plural="nominees"
-              movies={data.nominees}
-              // totalResults={totalResults}
-              renderItem={(movie) => <NomineeCard movie={movie} />}
-            />
-          </Scrollable>
-        )}
+        <Scrollable style={{ height: "100%" }}>
+          <MoviesList
+            singular="nominee"
+            plural="nominees"
+            movies={nominees}
+            renderItem={(movie) => <NomineeCard movie={movie} />}
+          />
+        </Scrollable>
         <div
           style={{
             alignItems: "center",

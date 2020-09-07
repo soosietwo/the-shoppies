@@ -8,7 +8,7 @@ import {
 } from "@shopify/polaris";
 import { gql, useMutation } from "@apollo/client";
 
-import { NOMINEES_QUERY } from "./Sidebar";
+import { NOMINEES_QUERY } from "./Home";
 import { NOMINEES_CONNECTION_QUERY } from "./Header";
 
 const DELETE_NOMINEE_MUTATION = gql`
@@ -42,6 +42,17 @@ const MovieCard = (props) => {
         { query: NOMINEES_QUERY },
         { query: NOMINEES_CONNECTION_QUERY },
       ],
+      update(cache, { data: { deleteNominee } }) {
+        cache.modify({
+          fields: {
+            nominees(existingNominees = []) {
+              return [...existingNominees].filter(
+                (nominee) => nominee.id !== deleteNominee.id
+              );
+            },
+          },
+        });
+      },
     }
   );
 
