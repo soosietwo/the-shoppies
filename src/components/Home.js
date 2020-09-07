@@ -60,7 +60,8 @@ const Home = () => {
               renderItem={(movie) => (
                 <MovieCard
                   movie={movie}
-                  nomineesCount={data && data.nominees.length}
+                  nominees={data && data.nominees}
+                  toggleSheetActive={toggleSheetActive}
                 />
               )}
             />

@@ -5,8 +5,9 @@ import {
   Button,
   ResourceItem,
   TextContainer,
+  Toast,
 } from "@shopify/polaris";
-import { gql, useMutation, useApolloClient } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 
 import { NOMINEES_QUERY } from "./Home";
 import { NOMINEES_CONNECTION_QUERY } from "./Header";
@@ -30,14 +31,12 @@ const ADD_NOMINEE_MUTATION = gql`
 const MovieCard = (props) => {
   const {
     movie: { title, year, poster, id },
-    nomineesCount,
+    nominees,
+    toggleSheetActive,
   } = props;
 
   const [isNominated, setIsNominated] = useState(false);
-
-  const { nominees } = useApolloClient().readQuery({
-    query: NOMINEES_QUERY,
-  });
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     if (nominees.some((nominee) => nominee.id === id)) {
@@ -60,7 +59,10 @@ const MovieCard = (props) => {
         { query: NOMINEES_QUERY },
         { query: NOMINEES_CONNECTION_QUERY },
       ],
-      update(cache, { data: { addNominee } }) {
+      update(cache, { data: { addNominee }, error }) {
+        if (error) return console.error(error);
+
+        setShowToast(true);
         cache.modify({
           fields: {
             nominees(existingNominees = []) {
@@ -95,12 +97,25 @@ const MovieCard = (props) => {
         <Heading>{title}</Heading>
         <Subheading>{year}</Subheading>
         <Button
-          disabled={loading || isNominated || nomineesCount >= 5}
+          disabled={loading || isNominated || nominees.length >= 5}
           onClick={() => addNominee({ variables: { title, year, poster, id } })}
         >
           {loading ? "Adding..." : isNominated ? "Nominated!" : "Add nominee"}
         </Button>
       </TextContainer>
+      {showToast ? (
+        <Toast
+          content={nominees.length === 5 ? "All done! " : "Nominee added!"}
+          onDismiss={() => setShowToast(false)}
+          duration={1000}
+          action={
+            nominees.length == 5 && {
+              content: "See nominees",
+              onAction: () => toggleSheetActive(true),
+            }
+          }
+        />
+      ) : null}
     </ResourceItem>
   );
 };
