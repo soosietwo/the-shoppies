@@ -31,7 +31,7 @@ const Header = ({ toggleSheetActive }) => {
                 style={{
                   padding: "5px 9px",
                   borderRadius: "50%",
-                  background: "red",
+                  background: "#BF0711",
                   color: "white",
                   marginLeft: "5px",
                   fontSize: "1.2rem",

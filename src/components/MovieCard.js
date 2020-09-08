@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Heading,
   Subheading,
@@ -35,14 +35,7 @@ const MovieCard = (props) => {
     toggleSheetActive,
   } = props;
 
-  const [isNominated, setIsNominated] = useState(false);
   const [showToast, setShowToast] = useState(false);
-
-  useEffect(() => {
-    if (nominees.some((nominee) => nominee.id === id)) {
-      setIsNominated(true);
-    }
-  }, [nominees, id]);
 
   const posterMarkup = (
     <img
@@ -97,10 +90,18 @@ const MovieCard = (props) => {
         <Heading>{title}</Heading>
         <Subheading>{year}</Subheading>
         <Button
-          disabled={loading || isNominated || nominees.length >= 5}
+          disabled={
+            loading ||
+            nominees.some((nominee) => nominee.id === id) ||
+            nominees.length >= 5
+          }
           onClick={() => addNominee({ variables: { title, year, poster, id } })}
         >
-          {loading ? "Adding..." : isNominated ? "Nominated!" : "Add nominee"}
+          {loading
+            ? "Adding..."
+            : nominees.some((nominee) => nominee.id === id)
+            ? "Nominated!"
+            : "Add nominee"}
         </Button>
       </TextContainer>
       {showToast ? (
@@ -109,7 +110,7 @@ const MovieCard = (props) => {
           onDismiss={() => setShowToast(false)}
           duration={nominees.length === 5 ? 10000 : 2000}
           action={
-            nominees.length == 5 && {
+            nominees.length === 5 && {
               content: "See nominees",
               onAction: () => toggleSheetActive(true),
             }
