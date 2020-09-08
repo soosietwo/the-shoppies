@@ -1,18 +1,30 @@
 # The Shoppies
 
 Search for your favourite movies and add them to your nominees list.
+
 Once you have five nominations, submit your selections!
+
 View the live version [here](https://the-shoppies.susiekims.vercel.app/).
+
 Made with React, Polaris, GraphQL, Apollo-Boost, and Prisma.
 
 ## Local Setup
 
 To run this file locally, clone this repository.
+
 In the root directory, run `yarn install`
+
 Create a file called `.env` and add `REACT_APP_API_KEY: <YOU_OMDB_API_KEY_HERE>`.
+
 Run `yarn start` to start the development server.
 
-`cd` to the `server` directory, run `yarn install` here as well. Once that has finished, run `yarn start`
+In a separate terminal tab, `cd` to the `server` directory
+
+Run `yarn install` here as well.
+
+Once that has finished, run `yarn start`
+
+You can view the app at http://localhost:3000 and the graphql playground at http://localhost:4000
 
 ## Notes
 
