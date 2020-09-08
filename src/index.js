@@ -11,7 +11,6 @@ import {
   ApolloProvider,
   createHttpLink,
 } from "@apollo/client";
-import "./assets/index.css";
 import App from "./App";
 import theme from "./assets/theme";
 
