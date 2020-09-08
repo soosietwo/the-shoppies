@@ -12,6 +12,6 @@ var models = [
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `https://us1.prisma.sh/susiekim9/shoppies/dev`
+  endpoint: `https://shoppies-production-a591d91a7b.herokuapp.com/shoppies-prod/prod`
 });
 exports.prisma = new exports.Prisma();

@@ -16,7 +16,10 @@ import App from "./App";
 import theme from "./assets/theme";
 
 const link = createHttpLink({
-  uri: "http://localhost:4000/",
+  uri:
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:4000/"
+      : process.env.HEROKU_ENDPOINT_PROD,
 });
 
 const client = new ApolloClient({
