@@ -107,7 +107,7 @@ const MovieCard = (props) => {
         <Toast
           content={nominees.length === 5 ? "All done! " : "Nominee added!"}
           onDismiss={() => setShowToast(false)}
-          duration={1000}
+          duration={nominees.length === 5 ? 10000 : 2000}
           action={
             nominees.length == 5 && {
               content: "See nominees",
