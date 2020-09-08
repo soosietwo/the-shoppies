@@ -1,68 +1,31 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# The Shoppies
 
-## Available Scripts
+Search for your favourite movies and add them to your nominees list.
+Once you have five nominations, submit your selections!
+View the live version [here](https://the-shoppies.susiekims.vercel.app/).
+Made with React, Polaris, GraphQL, Apollo-Boost, and Prisma.
 
-In the project directory, you can run:
+## Local Setup
 
-### `yarn start`
+To run this file locally, clone this repository.
+In the root directory, run `yarn install`
+`cd` to the `server` directory, run `yarn install` here as well.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Create a file called `.env` and add `REACT_APP_API_KEY: <YOU_OMDB_API_KEY_HERE>`
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Notes
 
-### `yarn test`
+I started the writing the challenge using `useReducer` and `useContext` to create a redux-like state management, a pattern I feel fairly comfortable with. Since I had some extra time, I decided to refactor it to instead use graphQL with Apollo. I wanted to use this opportunity to get acquainted with some of Shopify’s stack and challenge myself to technologies I have not worked with extensively before. I referenced https://www.howtographql.com/graphql-js/3-a-simple-mutation/ as well as Wes Bos’ advanced React course.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+For the appearance, I decided to use Shopify’s design system Polaris because although I had referenced it a lot people, I did not have the chance to actually use it so I thought this would be a good time to do so. Overall I found it very easy to use and the documentation was very well-written!
 
-### `yarn build`
+Currently, “Submitting” your nominations just deletes all your nominees, but if I had more time I would have liked to add a page where you can view your past submissions, as well as the submissions of others.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Other optimizations/features I would have liked to add if I had more time:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- finishing refactoring app to fully rely on GraphQL (the OMDB API call is still using a Redux-like pattern)
+- take better advantage of [Apollo's local state](https://www.apollographql.com/docs/tutorial/local-state/) so that I no longer have to use `useContext` and `useReducer`
+- add user authentication so you can log in to your account and submit nominees under your name
+- spend more time reading Apollo Client’s and Polaris' documentation to make sure I am following best practices
+- Do a more thorough a11y audit
+- Try refactoring to TypeScript
