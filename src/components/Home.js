@@ -30,7 +30,7 @@ const Home = () => {
     []
   );
 
-  const { loading, error, data } = useQuery(NOMINEES_QUERY);
+  const { loading, data } = useQuery(NOMINEES_QUERY);
 
   return (
     <Frame topBar={<Header toggleSheetActive={toggleSheetActive} />}>
@@ -73,7 +73,17 @@ const Home = () => {
             />
           )}
 
-          {state.totalResults > 10 && <Pagination />}
+          {state.totalResults > 10 && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                margin: "20px 0",
+              }}
+            >
+              <Pagination />
+            </div>
+          )}
         </Card>
 
         <Sidebar

@@ -26,7 +26,7 @@ const DELETE_ALL_NOMINEES_MUTATION = gql`
 const Sidebar = ({ toggleSheetActive, sheetActive, nominees }) => {
   const [showToast, setShowToast] = useState(false);
 
-  const [deleteAllNominees, { loading, data, error }] = useMutation(
+  const [deleteAllNominees, { loading }] = useMutation(
     DELETE_ALL_NOMINEES_MUTATION,
     {
       refetchQueries: [

@@ -22,7 +22,7 @@ const DELETE_NOMINEE_MUTATION = gql`
   }
 `;
 
-const MovieCard = (props) => {
+const NomineeCard = (props) => {
   const {
     movie: { title, year, poster, id },
   } = props;
@@ -35,26 +35,23 @@ const MovieCard = (props) => {
     />
   );
 
-  const [deleteNominee, { loading, data, error }] = useMutation(
-    DELETE_NOMINEE_MUTATION,
-    {
-      refetchQueries: [
-        { query: NOMINEES_QUERY },
-        { query: NOMINEES_CONNECTION_QUERY },
-      ],
-      update(cache, { data: { deleteNominee } }) {
-        cache.modify({
-          fields: {
-            nominees(existingNominees = [], { readField }) {
-              return [...existingNominees].filter(
-                (nomineeRef) => readField("id", nomineeRef) !== deleteNominee.id
-              );
-            },
+  const [deleteNominee, { loading }] = useMutation(DELETE_NOMINEE_MUTATION, {
+    refetchQueries: [
+      { query: NOMINEES_QUERY },
+      { query: NOMINEES_CONNECTION_QUERY },
+    ],
+    update(cache, { data: { deleteNominee } }) {
+      cache.modify({
+        fields: {
+          nominees(existingNominees = [], { readField }) {
+            return [...existingNominees].filter(
+              (nomineeRef) => readField("id", nomineeRef) !== deleteNominee.id
+            );
           },
-        });
-      },
-    }
-  );
+        },
+      });
+    },
+  });
 
   return (
     <ResourceItem
@@ -78,4 +75,4 @@ const MovieCard = (props) => {
   );
 };
 
-export default MovieCard;
+export default NomineeCard;

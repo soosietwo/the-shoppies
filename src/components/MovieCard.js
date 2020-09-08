@@ -45,38 +45,35 @@ const MovieCard = (props) => {
     />
   );
 
-  const [addNominee, { loading, data, error }] = useMutation(
-    ADD_NOMINEE_MUTATION,
-    {
-      refetchQueries: [
-        { query: NOMINEES_QUERY },
-        { query: NOMINEES_CONNECTION_QUERY },
-      ],
-      update(cache, { data: { addNominee }, error }) {
-        if (error) return console.error(error);
+  const [addNominee, { loading }] = useMutation(ADD_NOMINEE_MUTATION, {
+    refetchQueries: [
+      { query: NOMINEES_QUERY },
+      { query: NOMINEES_CONNECTION_QUERY },
+    ],
+    update(cache, { data: { addNominee }, error }) {
+      if (error) return console.error(error);
 
-        setShowToast(true);
-        cache.modify({
-          fields: {
-            nominees(existingNominees = []) {
-              const newNomineeRef = cache.writeFragment({
-                data: addNominee,
-                fragment: gql`
-                  fragment NewNominee on Todo {
-                    id
-                    title
-                    year
-                    poster
-                  }
-                `,
-              });
-              return [...existingNominees, newNomineeRef];
-            },
+      setShowToast(true);
+      cache.modify({
+        fields: {
+          nominees(existingNominees = []) {
+            const newNomineeRef = cache.writeFragment({
+              data: addNominee,
+              fragment: gql`
+                fragment NewNominee on Todo {
+                  id
+                  title
+                  year
+                  poster
+                }
+              `,
+            });
+            return [...existingNominees, newNomineeRef];
           },
-        });
-      },
-    }
-  );
+        },
+      });
+    },
+  });
 
   return (
     <ResourceItem

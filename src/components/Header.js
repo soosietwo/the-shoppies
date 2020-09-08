@@ -15,7 +15,7 @@ export const NOMINEES_CONNECTION_QUERY = gql`
 `;
 
 const Header = ({ toggleSheetActive }) => {
-  const { loading, error, data } = useQuery(NOMINEES_CONNECTION_QUERY);
+  const { data } = useQuery(NOMINEES_CONNECTION_QUERY);
   const count = data ? data.nomineesConnection.aggregate.count : 0;
 
   return (
