@@ -1,4 +1,4 @@
-# The Shoppies
+# ✨🏆The Shoppies 🏆✨
 
 Search for your favourite movies and add them to your nominees list.
 
@@ -28,7 +28,7 @@ You can view the app at http://localhost:3000 and the graphql playground at http
 
 ## Notes
 
-Although I had a personal project I wanted to share, I thought this would be a great opporunity to try out some parts of Shopify's tech stack so I thought I would do the challenge as well. I started the writing the challenge using `useReducer` and `useContext` to create a redux-like state management, a pattern I feel fairly comfortable with. Since I had some extra time, I decided to refactor it to instead use graphQL with Apollo. I wanted challenge myself to technologies I have not worked with extensively before, but maybe that wasn't a great idea as I felt like I had to rush through reading all the documenation 😅. I referenced https://www.howtographql.com/graphql-js/3-a-simple-mutation/ as well as Wes Bos’ advanced React course.
+Although I have a [personal project](https://github.com/takecare19/takecare19) I wanted to share, I thought this would be a great opporunity to try out some parts of Shopify's tech stack so I thought I would do the challenge as well. I started the writing the challenge using `useReducer` and `useContext` to create a redux-like state management, a pattern I feel fairly comfortable with. Since I had some extra time, I decided to refactor it to instead use graphQL with Apollo. I wanted challenge myself to technologies I have not worked with extensively before, but maybe that wasn't a great idea as I felt like I had to rush through reading all the documenation 😅. I referenced https://www.howtographql.com/graphql-js/3-a-simple-mutation/ as well as Wes Bos’ advanced React course.
 
 For the appearance, I decided to use Shopify’s design system Polaris. Although I had referenced it a lot before while working on a design system at work, I did not have the chance to actually use it so I thought this would be a good opportunity to do so. Overall I found it very easy to use and the documentation was very well-written!
 
