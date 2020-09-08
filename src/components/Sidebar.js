@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Sheet, Heading, Button, Scrollable, Toast } from "@shopify/polaris";
+import {
+  Sheet,
+  Heading,
+  Button,
+  Scrollable,
+  Toast,
+  Banner,
+} from "@shopify/polaris";
 import { MobileCancelMajorMonotone } from "@shopify/polaris-icons";
 import { gql, useMutation } from "@apollo/client";
 
@@ -60,11 +67,18 @@ const Sidebar = ({ toggleSheetActive, sheetActive, nominees }) => {
             plain
           />
         </div>
+        {nominees.length === 5 && (
+          <Banner status="success" title="All done!">
+            <p>You have chosen 5 nominees. Submit or remove them.</p>
+          </Banner>
+        )}
         <Scrollable style={{ height: "100%" }}>
           <MoviesList
             singular="nominee"
             plural="nominees"
             movies={nominees}
+            emptyStateTitle="No nominees yet"
+            emptyStateCaption="Choose five of your favourite movies to nominate!"
             renderItem={(movie) => <NomineeCard movie={movie} />}
           />
         </Scrollable>
@@ -81,7 +95,12 @@ const Sidebar = ({ toggleSheetActive, sheetActive, nominees }) => {
           <Button loading={loading} onClick={toggleSheetActive}>
             Cancel
           </Button>
-          <Button loading={loading} primary onClick={deleteAllNominees}>
+          <Button
+            disabled={nominees.length !== 5}
+            loading={loading}
+            primary
+            onClick={deleteAllNominees}
+          >
             Submit Nominees
           </Button>
         </div>

@@ -1,15 +1,20 @@
 import React from "react";
-import { EmptyState } from "@shopify/polaris";
+import { EmptyState, Card } from "@shopify/polaris";
 
-const EmptyStateMessage = (movies) => {
+const EmptyStateMessage = ({
+  movies,
+  emptyStateTitle = "No movies found",
+  emptyStateCaption = "Search to get started!",
+}) => {
   return !movies.length ? (
-    <EmptyState
-      heading="No movies found"
-      action=""
-      image="https://cdn.shopify.com/s/files/1/2376/3301/products/emptystate-files.png"
-    >
-      <p>Search to get started!</p>
-    </EmptyState>
+    <Card>
+      <EmptyState
+        heading={emptyStateTitle}
+        image="https://www.iconarchive.com/download/i99782/designbolts/free-multimedia/Film.ico"
+      >
+        <p>{emptyStateCaption}</p>
+      </EmptyState>
+    </Card>
   ) : undefined;
 };
 

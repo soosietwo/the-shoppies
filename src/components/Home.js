@@ -23,7 +23,7 @@ export const NOMINEES_QUERY = gql`
 `;
 
 const Home = () => {
-  const [state, dispatch] = useContext(Context);
+  const [state] = useContext(Context);
   const [sheetActive, setSheetActive] = useState(false);
   const toggleSheetActive = useCallback(
     () => setSheetActive((sheetActive) => !sheetActive),
@@ -34,9 +34,12 @@ const Home = () => {
 
   return (
     <Frame topBar={<Header toggleSheetActive={toggleSheetActive} />}>
-      <Page title="The Shoppies">
+      <Page>
         <Card>
-          {(state.isLoading || loading) && <Loader count={10} />}
+          {state.error && !state.isLoading && (
+            <Error title="Oops! Something went wrong" details={state.error} />
+          )}
+
           {data && data.nominees.length === 5 && (
             <Banner
               status="success"
@@ -46,17 +49,20 @@ const Home = () => {
                 onAction: () => toggleSheetActive(true),
               }}
             >
-              <p>You have chosen 5 nominees. Submit or modify them now.</p>
+              <p>You have chosen 5 nominees. Submit or remove them.</p>
             </Banner>
           )}
-          {state.error && !state.isLoading ? (
-            <Error title="Oops!" details={state.error} />
+
+          {state.isLoading || loading ? (
+            <Loader count={10} />
           ) : (
             <MoviesList
               singular="movie"
               plural="movies"
               movies={state.movies}
               totalResults={state.totalResults}
+              emptyStateTitle="No movies found"
+              emptyStateCaption="Start typing in your favourite movie titles to get started!"
               renderItem={(movie) => (
                 <MovieCard
                   movie={movie}
@@ -66,11 +72,12 @@ const Home = () => {
               )}
             />
           )}
+
           {state.totalResults > 10 && <Pagination />}
         </Card>
 
         <Sidebar
-          nominees={data && data.nominees}
+          nominees={(data && data.nominees) || []}
           toggleSheetActive={toggleSheetActive}
           sheetActive={sheetActive}
         />
