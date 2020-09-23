@@ -37,6 +37,13 @@ const Sidebar = ({ toggleSheetActive, sheetActive, nominees }) => {
         if (error) return console.error(error);
         if (data) setShowToast(true);
       },
+      optimisticResponse: {
+        __typename: "Mutation",
+        deleteAllNominees: {
+          count: 5,
+          __typename: "BatchPayload",
+        },
+      },
     }
   );
 

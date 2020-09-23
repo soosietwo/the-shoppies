@@ -73,6 +73,16 @@ const MovieCard = (props) => {
         },
       });
     },
+    optimisticResponse: {
+      __typename: "Mutation",
+      addNominee: {
+        __typename: "Nominee",
+        title,
+        year,
+        poster,
+        id,
+      },
+    },
   });
 
   return (
@@ -94,10 +104,10 @@ const MovieCard = (props) => {
           }
           onClick={() => addNominee({ variables: { title, year, poster, id } })}
         >
-          {loading
-            ? "Adding..."
-            : nominees.some((nominee) => nominee.id === id)
+          {showToast || nominees.some((nominee) => nominee.id === id)
             ? "Nominated!"
+            : loading
+            ? "Adding..."
             : "Add nominee"}
         </Button>
       </TextContainer>

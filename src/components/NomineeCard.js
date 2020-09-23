@@ -40,6 +40,16 @@ const NomineeCard = (props) => {
       { query: NOMINEES_QUERY },
       { query: NOMINEES_CONNECTION_QUERY },
     ],
+    optimisticResponse: {
+      __typename: "Mutation",
+      deleteNominee: {
+        __typename: "Nominee",
+        title,
+        year,
+        poster,
+        id,
+      },
+    },
     update(cache, { data: { deleteNominee } }) {
       cache.modify({
         fields: {

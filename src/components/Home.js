@@ -53,7 +53,7 @@ const Home = () => {
             </Banner>
           )}
 
-          {state.isLoading || loading ? (
+          {state.isLoading ? (
             <Loader count={10} />
           ) : (
             <MoviesList
