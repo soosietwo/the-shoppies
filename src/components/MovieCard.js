@@ -46,32 +46,38 @@ const MovieCard = (props) => {
   );
 
   const [addNominee, { loading }] = useMutation(ADD_NOMINEE_MUTATION, {
-    refetchQueries: [
-      { query: NOMINEES_QUERY },
-      { query: NOMINEES_CONNECTION_QUERY },
-    ],
-    update(cache, { data: { addNominee }, error }) {
+    update(cache, { error }) {
       if (error) return console.error(error);
 
-      setShowToast(true);
-      cache.modify({
-        fields: {
-          nominees(existingNominees = []) {
-            const newNomineeRef = cache.writeFragment({
-              data: addNominee,
-              fragment: gql`
-                fragment NewNominee on Todo {
-                  id
-                  title
-                  year
-                  poster
-                }
-              `,
-            });
-            return [...existingNominees, newNomineeRef];
+      const nomineesQuery = cache.readQuery({ query: NOMINEES_QUERY });
+      const nominees = [
+        ...nomineesQuery.nominees,
+        { title, year, poster, id, __typename: "Nominee" },
+      ];
+      cache.writeQuery({
+        query: NOMINEES_QUERY,
+        data: { ...nomineesQuery, nominees },
+      });
+
+      const nomineesConnectionQuery = cache.readQuery({
+        query: NOMINEES_CONNECTION_QUERY,
+      });
+      const prevCount =
+        nomineesConnectionQuery.nomineesConnection.aggregate.count;
+      cache.writeQuery({
+        query: NOMINEES_CONNECTION_QUERY,
+        data: {
+          nomineesConnection: {
+            __typename: "NomineeConnection",
+            aggregate: {
+              __typename: "AggregateNominee",
+              count: prevCount + 1,
+            },
           },
         },
       });
+
+      setShowToast(true);
     },
     optimisticResponse: {
       __typename: "Mutation",
