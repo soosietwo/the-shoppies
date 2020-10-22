@@ -1,5 +1,5 @@
 {
-  "name": "hackernews-node",
+  "name": "shoppies-server",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
@@ -7,9 +7,9 @@
     "prisma": "prisma"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
+    "axios": "^0.20.0",
+    "dotenv": "^8.2.0",
     "graphql-yoga": "^1.7.0",
-    "jsonwebtoken": "^8.2.0",
     "prisma-binding": "^2.3.16",
     "prisma-client-lib": "^1.31.0"
   },

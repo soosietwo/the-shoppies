@@ -26,6 +26,18 @@ type AggregateNominee {
   count: Int!
 }
 
+type Movie {
+  id: ID!
+  title: String!
+  poster: String
+  year: Int!
+}
+
+type MovieQueryResult {
+  movies: [Movie]!
+  totalResults: Int!
+}
+
 type Nominee {
   id: ID!
   title: String!
@@ -35,6 +47,7 @@ type Nominee {
 
 type Query {
   nominees: [Nominee]!
+  movies(searchTerm: String, page: Int!): MovieQueryResult!
   nomineesConnection: NomineeConnection!
 }
 
