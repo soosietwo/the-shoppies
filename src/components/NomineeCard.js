@@ -36,10 +36,6 @@ const NomineeCard = (props) => {
   );
 
   const [deleteNominee, { loading }] = useMutation(DELETE_NOMINEE_MUTATION, {
-    refetchQueries: [
-      { query: NOMINEES_QUERY },
-      { query: NOMINEES_CONNECTION_QUERY },
-    ],
     optimisticResponse: {
       __typename: "Mutation",
       deleteNominee: {
@@ -50,13 +46,34 @@ const NomineeCard = (props) => {
         id,
       },
     },
-    update(cache, { data: { deleteNominee } }) {
-      cache.modify({
-        fields: {
-          nominees(existingNominees = [], { readField }) {
-            return [...existingNominees].filter(
-              (nomineeRef) => readField("id", nomineeRef) !== deleteNominee.id
-            );
+    update(cache, { error, data }) {
+      if (error) return console.error(error);
+
+      const nomineesQuery = cache.readQuery({ query: NOMINEES_QUERY });
+      const nominees = [
+        ...nomineesQuery.nominees.filter(
+          (nominee) => data.deleteNominee.id !== nominee.id
+        ),
+      ];
+      cache.writeQuery({
+        query: NOMINEES_QUERY,
+        data: { ...nomineesQuery, nominees },
+      });
+
+      const nomineesConnectionQuery = cache.readQuery({
+        query: NOMINEES_CONNECTION_QUERY,
+      });
+      const prevCount =
+        nomineesConnectionQuery.nomineesConnection.aggregate.count;
+      cache.writeQuery({
+        query: NOMINEES_CONNECTION_QUERY,
+        data: {
+          nomineesConnection: {
+            __typename: "NomineeConnection",
+            aggregate: {
+              __typename: "AggregateNominee",
+              count: prevCount - 1,
+            },
           },
         },
       });
