@@ -25,6 +25,11 @@
     "eject": "react-scripts eject",
     "heroku-postbuild": "react-scripts build"
   },
+  "jest": {
+    "transform": {
+      "^.+\\.js?$": "babel-jest"
+    }
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -39,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-test-renderer": "^17.0.1"
   }
 }

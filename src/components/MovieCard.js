@@ -31,7 +31,7 @@ const ADD_NOMINEE_MUTATION = gql`
 const MovieCard = (props) => {
   const {
     movie: { title, year, poster, id },
-    nominees,
+    nominees = [],
     toggleSheetActive,
   } = props;
 
