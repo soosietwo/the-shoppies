@@ -80,14 +80,24 @@ describe("MovieCard", () => {
   it("renders and matches snapshot", () => {
     const { container } = render(
       <MockedProvider>
-        <MovieCard movie={mockMovie} nominees={[mocks]} />
+        <MovieCard movie={mockMovie} nominees={[]} />
       </MockedProvider>
     );
 
     expect(container.querySelector(".Polaris-ResourceItem")).toMatchSnapshot();
   });
 
-  it("adds a movie as a nominee", async () => {
+  it("renders a disabled button if the movie is already nominated", () => {
+    const { getByText } = render(
+      <MockedProvider>
+        <MovieCard movie={mockMovie} nominees={[mockMovie]} />
+      </MockedProvider>
+    );
+
+    expect(getByText("Nominated!").closest("button")).toBeDisabled();
+  });
+
+  it("adds a movie as a nominee and disables button", async () => {
     let apolloClient;
 
     const { getByText } = render(
@@ -109,7 +119,7 @@ describe("MovieCard", () => {
     await apolloClient.query({ query: NOMINEES_CONNECTION_QUERY });
 
     await waitFor(() => {
-      expect(getByText("Nominated!")).toBeVisible();
+      expect(getByText("Nominated!").closest("button")).toBeDisabled();
     });
   });
 });
