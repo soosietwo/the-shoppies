@@ -1,7 +1,7 @@
 // test-utils.js
 import React from "react";
 import { render } from "@testing-library/react";
-import { AppProvider } from "@shopify/polaris";
+import { AppProvider, Frame } from "@shopify/polaris";
 import en from "@shopify/polaris/locales/en.json";
 
 Object.defineProperty(window, "matchMedia", {
@@ -19,7 +19,11 @@ Object.defineProperty(window, "matchMedia", {
 });
 
 const AllTheProviders = ({ children }) => {
-  return <AppProvider i18n={en}>{children}</AppProvider>;
+  return (
+    <AppProvider i18n={en}>
+      <Frame>{children}</Frame>
+    </AppProvider>
+  );
 };
 
 const customRender = (ui, options) =>

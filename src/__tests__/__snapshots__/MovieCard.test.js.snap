@@ -1,65 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MovieCard renders and matches snapshot 1`] = `
-<div>
-  <div>
+<div
+  class="Polaris-ResourceItem"
+>
+  <button
+    aria-label="View details for test"
+    class="Polaris-ResourceItem__Button"
+    tabindex="0"
+  />
+  <div
+    class="Polaris-ResourceItem__Container Polaris-ResourceItem--alignmentCenter"
+    id="132"
+  >
     <div
-      class="Polaris-ResourceItem"
+      class="Polaris-ResourceItem__Owned"
     >
-      <button
-        aria-label="View details for test"
-        class="Polaris-ResourceItem__Button"
-        tabindex="0"
-      />
       <div
-        class="Polaris-ResourceItem__Container Polaris-ResourceItem--alignmentCenter"
-        id="132"
+        class="Polaris-ResourceItem__Media"
       >
-        <div
-          class="Polaris-ResourceItem__Owned"
+        <img
+          alt="Poster for test"
+          src="123"
+          style="max-width: 100px;"
+        />
+      </div>
+    </div>
+    <div
+      class="Polaris-ResourceItem__Content"
+    >
+      <div
+        class="Polaris-TextContainer"
+      >
+        <h2
+          class="Polaris-Heading"
         >
-          <div
-            class="Polaris-ResourceItem__Media"
-          >
-            <img
-              alt="Poster for test"
-              src="123"
-              style="max-width: 100px;"
-            />
-          </div>
-        </div>
-        <div
-          class="Polaris-ResourceItem__Content"
+          test
+        </h2>
+        <h3
+          class="Polaris-Subheading"
         >
-          <div
-            class="Polaris-TextContainer"
+          1234
+        </h3>
+        <button
+          class="Polaris-Button"
+          type="button"
+        >
+          <span
+            class="Polaris-Button__Content"
           >
-            <h2
-              class="Polaris-Heading"
+            <span
+              class="Polaris-Button__Text"
             >
-              test
-            </h2>
-            <h3
-              class="Polaris-Subheading"
-            >
-              1234
-            </h3>
-            <button
-              class="Polaris-Button"
-              type="button"
-            >
-              <span
-                class="Polaris-Button__Content"
-              >
-                <span
-                  class="Polaris-Button__Text"
-                >
-                  Add nominee
-                </span>
-              </span>
-            </button>
-          </div>
-        </div>
+              Add nominee
+            </span>
+          </span>
+        </button>
       </div>
     </div>
   </div>

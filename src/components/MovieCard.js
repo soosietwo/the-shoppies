@@ -12,7 +12,7 @@ import { gql, useMutation } from "@apollo/client";
 import { NOMINEES_QUERY } from "./Home";
 import { NOMINEES_CONNECTION_QUERY } from "./Header";
 
-const ADD_NOMINEE_MUTATION = gql`
+export const ADD_NOMINEE_MUTATION = gql`
   mutation ADD_NOMINEE_MUTATION(
     $id: ID!
     $title: String!
@@ -48,7 +48,6 @@ const MovieCard = (props) => {
   const [addNominee, { loading }] = useMutation(ADD_NOMINEE_MUTATION, {
     update(cache, { error }) {
       if (error) return console.error(error);
-
       const nomineesQuery = cache.readQuery({ query: NOMINEES_QUERY });
       const nominees = [
         ...nomineesQuery.nominees,
@@ -108,7 +107,11 @@ const MovieCard = (props) => {
             nominees.some((nominee) => nominee.id === id) ||
             nominees.length >= 5
           }
-          onClick={() => addNominee({ variables: { title, year, poster, id } })}
+          onClick={() =>
+            addNominee({
+              variables: { id, title, poster, year },
+            }).catch((err) => console.log(err))
+          }
         >
           {showToast || nominees.some((nominee) => nominee.id === id)
             ? "Nominated!"
