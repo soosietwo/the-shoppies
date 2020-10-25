@@ -20,7 +20,7 @@ export const initialState = {
   isLoading: false,
   currentPage: 1,
   error: null,
-  totalResults: 50,
+  totalResults: 0,
   nominees: [],
 };
 

@@ -7,7 +7,7 @@ import {
   Toast,
   Banner,
 } from "@shopify/polaris";
-import { MobileCancelMajorMonotone } from "@shopify/polaris-icons";
+import { MobileCancelMajor } from "@shopify/polaris-icons";
 import { gql, useMutation } from "@apollo/client";
 
 import MoviesList from "./MoviesList";
@@ -69,7 +69,7 @@ const Sidebar = ({ toggleSheetActive, sheetActive, nominees }) => {
           <Heading>Your nominations</Heading>
           <Button
             accessibilityLabel="Cancel"
-            icon={MobileCancelMajorMonotone}
+            icon={MobileCancelMajor}
             onClick={toggleSheetActive}
             plain
           />

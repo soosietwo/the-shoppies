@@ -1,7 +1,7 @@
 import React from "react";
 
 import Store from "./store";
-import initialState from "./store/reducer";
+import { initialState } from "./store/reducer";
 import Home from "./components/Home";
 
 function App() {
