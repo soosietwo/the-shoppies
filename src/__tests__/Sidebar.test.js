@@ -23,27 +23,29 @@ const mocks = [
 ];
 
 describe("Sidebar", () => {
-  it("renders and matches snapshot", () => {
-    const { container } = render(
-      <MockedProvider addTypename={false} mocks={mocks}>
+  it("renders and matches snapshot", async () => {
+    const { baseElement } = render(
+      <MockedProvider mocks={mocks}>
         <Sidebar sheetActive={true} nominees={[mockNominee]} />
       </MockedProvider>
     );
 
-    expect(container).toMatchSnapshot();
+    await waitFor(() => {
+      expect(baseElement.querySelector(".Polaris-Sheet")).toMatchSnapshot();
+    });
   });
 
-  // it("displays the correct number of nominees", async () => {
-  //   const { container } = render(
-  //     <MockedProvider addTypename={false} mocks={mocks}>
-  //       <Store>
-  //         <Sidebar />
-  //       </Store>
-  //     </MockedProvider>
-  //   );
+  it("displays the correct number of nominations", async () => {
+    const { baseElement } = render(
+      <MockedProvider mocks={mocks}>
+        <Sidebar sheetActive={true} nominees={[mockNominee]} />
+      </MockedProvider>
+    );
 
-  //   await waitFor(() => {
-  //     expect(container.querySelector(".count")).toHaveTextContent("1");
-  //   });
-  // });
+    await waitFor(() => {
+      expect(
+        baseElement.querySelectorAll(".Polaris-ResourceItem")
+      ).toHaveLength(1);
+    });
+  });
 });

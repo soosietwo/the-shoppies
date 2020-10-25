@@ -17,12 +17,15 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: jest.fn(),
   })),
 });
+Object.defineProperty(window, "scroll", { value: jest.fn(), writable: true });
 
 const AllTheProviders = ({ children }) => {
   return (
-    <AppProvider i18n={en}>
-      <Frame>{children}</Frame>
-    </AppProvider>
+    <div id="test-bed">
+      <AppProvider i18n={en}>
+        <Frame>{children}</Frame>
+      </AppProvider>
+    </div>
   );
 };
 
