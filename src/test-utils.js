@@ -3,6 +3,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { AppProvider, Frame } from "@shopify/polaris";
 import en from "@shopify/polaris/locales/en.json";
+import Store from "./store";
 
 Object.defineProperty(window, "matchMedia", {
   writable: true,
@@ -21,7 +22,9 @@ Object.defineProperty(window, "matchMedia", {
 const AllTheProviders = ({ children }) => {
   return (
     <AppProvider i18n={en}>
-      <Frame>{children}</Frame>
+      <Store>
+        <Frame>{children}</Frame>
+      </Store>
     </AppProvider>
   );
 };

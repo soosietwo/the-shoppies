@@ -11,7 +11,7 @@ import { gql, useMutation } from "@apollo/client";
 import { NOMINEES_QUERY } from "./Home";
 import { NOMINEES_CONNECTION_QUERY } from "./Header";
 
-const DELETE_NOMINEE_MUTATION = gql`
+export const DELETE_NOMINEE_MUTATION = gql`
   mutation DELETE_NOMINEE_MUTATION($id: ID!) {
     deleteNominee(id: $id) {
       id

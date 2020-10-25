@@ -49,10 +49,12 @@ const MovieCard = (props) => {
     update(cache, { error }) {
       if (error) return console.error(error);
       const nomineesQuery = cache.readQuery({ query: NOMINEES_QUERY });
+      const existingNominees = nomineesQuery ? nomineesQuery.nominees : [];
       const nominees = [
-        ...nomineesQuery.nominees,
+        ...existingNominees,
         { title, year, poster, id, __typename: "Nominee" },
       ];
+
       cache.writeQuery({
         query: NOMINEES_QUERY,
         data: { ...nomineesQuery, nominees },
@@ -61,8 +63,10 @@ const MovieCard = (props) => {
       const nomineesConnectionQuery = cache.readQuery({
         query: NOMINEES_CONNECTION_QUERY,
       });
+
       const prevCount =
         nomineesConnectionQuery.nomineesConnection.aggregate.count;
+
       cache.writeQuery({
         query: NOMINEES_CONNECTION_QUERY,
         data: {

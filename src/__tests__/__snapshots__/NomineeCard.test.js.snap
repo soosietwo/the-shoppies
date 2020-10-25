@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NomineeCard renders and matches snapshot 1`] = `
+<div
+  class="Polaris-ResourceItem"
+>
+  <button
+    aria-label="View details for test"
+    class="Polaris-ResourceItem__Button"
+    tabindex="0"
+  />
+  <div
+    class="Polaris-ResourceItem__Container Polaris-ResourceItem--alignmentCenter"
+    id="132"
+  >
+    <div
+      class="Polaris-ResourceItem__Owned"
+    >
+      <div
+        class="Polaris-ResourceItem__Media"
+      >
+        <img
+          alt="Poster for test"
+          src="123"
+          style="max-width: 100px;"
+        />
+      </div>
+    </div>
+    <div
+      class="Polaris-ResourceItem__Content"
+    >
+      <div
+        class="Polaris-TextContainer"
+      >
+        <h2
+          class="Polaris-Heading"
+        >
+          test
+        </h2>
+        <h3
+          class="Polaris-Subheading"
+        >
+          1234
+        </h3>
+        <button
+          class="Polaris-Button Polaris-Button--destructive"
+          type="button"
+        >
+          <span
+            class="Polaris-Button__Content"
+          >
+            <span
+              class="Polaris-Button__Text"
+            >
+              Remove
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

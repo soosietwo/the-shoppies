@@ -1,11 +1,10 @@
 import React from "react";
-import { render, fireEvent } from "../test-utils";
+import { render, fireEvent, waitFor } from "../test-utils";
 import { MockedProvider } from "@apollo/client/testing";
 import { ApolloConsumer } from "@apollo/client";
 import MovieCard, { ADD_NOMINEE_MUTATION } from "../components/MovieCard";
 import { NOMINEES_QUERY } from "../components/Home";
 import { NOMINEES_CONNECTION_QUERY } from "../components/Header";
-import { waitFor } from "@testing-library/react";
 
 const mockMovie = {
   id: "132",
@@ -95,6 +94,24 @@ describe("MovieCard", () => {
     );
 
     expect(getByText("Nominated!").closest("button")).toBeDisabled();
+  });
+
+  it("renders a disabled button if there are 5 nominees", () => {
+    const nominees = Array(5)
+      .fill("")
+      .map(() => ({
+        ...mockMovie,
+        id: "69",
+        __typename: "Nominee",
+      }));
+
+    const { getByText } = render(
+      <MockedProvider>
+        <MovieCard movie={mockMovie} nominees={nominees} />
+      </MockedProvider>
+    );
+
+    expect(getByText("Add nominee").closest("button")).toBeDisabled();
   });
 
   it("adds a movie as a nominee and disables button", async () => {
