@@ -32,7 +32,7 @@ function SearchBar(props) {
       dispatch({ type: FETCH_MOVIES, searchTerm });
 
       api
-        .getMovies(searchTerm, null, 1)
+        .getMovies(searchTerm, 1)
         .then(({ Error, Search, totalResults }) => {
           if (Error) {
             dispatch({ type: FETCH_MOVIES_FAILURE, payload: Error });

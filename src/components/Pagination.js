@@ -17,7 +17,7 @@ const PaginationComponent = () => {
   const getPage = (page) => {
     dispatch({ type: page > state.currentPage ? FETCH_NEXT : FETCH_PREVIOUS });
     api
-      .getMovies(state.searchTerm, null, page)
+      .getMovies(state.searchTerm, page)
       .then(({ Error, Search, totalResults }) => {
         if (Error) {
           dispatch({ type: FETCH_MOVIES_FAILURE, payload: Error });

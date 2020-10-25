@@ -1,16 +1,7 @@
 import React, { createContext, useReducer } from "react";
-import reducer from "./reducer";
+import reducer, { initialState } from "./reducer";
 
-const initialState = {
-  movies: [],
-  isLoading: false,
-  currentPage: 1,
-  error: null,
-  totalResults: 0,
-  nominees: [],
-};
-
-const Store = ({ children }) => {
+const Store = ({ children, initialState }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <Context.Provider value={[state, dispatch]}>{children}</Context.Provider>

@@ -17,9 +17,7 @@ const mockNominee = {
 
 const mockMutationResult = jest.fn(() => ({
   data: {
-    __typename: "Mutation",
     deleteNominee: {
-      __typename: "Nominee",
       ...mockNominee,
     },
   },
@@ -30,12 +28,7 @@ const mocks = [
     request: { query: NOMINEES_QUERY },
     result: {
       data: {
-        nominees: [
-          {
-            ...mockNominee,
-            __typename: "Nominee",
-          },
-        ],
+        nominees: [mockNominee],
       },
     },
   },

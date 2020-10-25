@@ -22,7 +22,6 @@ const mocks = [
     result: {
       data: {
         addNominee: {
-          __typename: "Nominee",
           ...mockMovie,
         },
       },
@@ -55,7 +54,6 @@ const mocks = [
         nominees: [
           {
             ...mockMovie,
-            __typename: "Nominee",
           },
         ],
       },

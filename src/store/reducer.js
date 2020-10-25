@@ -15,6 +15,15 @@ const transformMovie = ({ imdbID, Poster, Year, Title }) => ({
   title: Title,
 });
 
+export const initialState = {
+  movies: [],
+  isLoading: false,
+  currentPage: 1,
+  error: null,
+  totalResults: 50,
+  nominees: [],
+};
+
 const reducer = (state, action) => {
   switch (action.type) {
     case FETCH_MOVIES:
