@@ -15,7 +15,7 @@ import NomineeCard from "./NomineeCard";
 import { NOMINEES_QUERY } from "./Home";
 import { NOMINEES_CONNECTION_QUERY } from "./Header";
 
-const DELETE_ALL_NOMINEES_MUTATION = gql`
+export const DELETE_ALL_NOMINEES_MUTATION = gql`
   mutation DELETE_ALL_NOMINEES_MUTATION {
     deleteAllNominees {
       count
