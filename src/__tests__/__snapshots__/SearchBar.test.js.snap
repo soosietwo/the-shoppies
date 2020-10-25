@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBar renders and matches snapshot 1`] = `
+<div>
+  <div>
+    <div
+      class="Polaris-Frame"
+      data-polaris-layer="true"
+    >
+      <div
+        class="Polaris-Frame__Skip"
+      >
+        <a
+          class="Polaris-Button"
+          data-polaris-unstyled="true"
+          data-polaris-unstyled-button="true"
+          href="#AppFrameMainContent"
+        >
+          <span
+            class="Polaris-Button__Content"
+          >
+            <span
+              class="Polaris-Button__Text"
+            >
+              Skip to content
+            </span>
+          </span>
+        </a>
+      </div>
+      <div
+        class="Polaris-Frame__ContextualSaveBar Polaris-Frame-CSSAnimation--startFade"
+      />
+      <main
+        class="Polaris-Frame__Main"
+        data-has-global-ribbon="false"
+        id="AppFrameMain"
+      >
+        <a
+          id="AppFrameMainContent"
+          tabindex="-1"
+        />
+        <div
+          class="Polaris-Frame__Content"
+        >
+          <div
+            class="Polaris-TopBar-SearchField"
+          >
+            <span
+              class="Polaris-VisuallyHidden"
+            >
+              <label
+                for="PolarisSearchField1"
+              >
+                Search
+              </label>
+            </span>
+            <input
+              autocapitalize="off"
+              autocomplete="off"
+              autocorrect="off"
+              class="Polaris-TopBar-SearchField__Input"
+              id="PolarisSearchField1"
+              placeholder="Search"
+              type="search"
+              value=""
+            />
+            <span
+              class="Polaris-TopBar-SearchField__Icon"
+            >
+              <span
+                class="Polaris-Icon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="Polaris-Icon__Svg"
+                  focusable="false"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm9.707 4.293l-4.82-4.82A5.968 5.968 0 0 0 14 8 6 6 0 0 0 2 8a6 6 0 0 0 6 6 5.968 5.968 0 0 0 3.473-1.113l4.82 4.82a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414z"
+                  />
+                </svg>
+              </span>
+            </span>
+            <div
+              class="Polaris-TopBar-SearchField__Backdrop Polaris-TopBar-SearchField__BackdropShowFocusBorder"
+            />
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+`;
