@@ -2,6 +2,7 @@ import React from "react";
 import { render, waitFor } from "../test-utils";
 import { MockedProvider } from "@apollo/client/testing";
 import Header, { NOMINEES_CONNECTION_QUERY } from "../components/Header";
+import Store from "../store";
 
 const mocks = [
   {
@@ -22,7 +23,9 @@ describe("Header", () => {
   it("renders and matches snapshot", () => {
     const { container } = render(
       <MockedProvider addTypename={false} mocks={mocks}>
-        <Header />
+        <Store>
+          <Header />
+        </Store>
       </MockedProvider>
     );
 
@@ -32,7 +35,9 @@ describe("Header", () => {
   it("displays the correct number of nominees", async () => {
     const { container } = render(
       <MockedProvider addTypename={false} mocks={mocks}>
-        <Header />
+        <Store>
+          <Header />
+        </Store>
       </MockedProvider>
     );
 

@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loader renders and matches snapshot 1`] = `
+<div
+  class="Polaris-ResourceList__ResourceListWrapper"
+>
+  <ul
+    aria-live="polite"
+    class="Polaris-ResourceList"
+  >
+    <li
+      class="Polaris-ResourceItem__ListItem"
+    >
+      <div
+        class="Polaris-ResourceItem__ItemWrapper"
+      >
+        <div
+          class="Polaris-ResourceItem"
+        >
+          <button
+            aria-label="View details for item"
+            class="Polaris-ResourceItem__Button"
+            tabindex="0"
+          />
+          <div
+            class="Polaris-ResourceItem__Container"
+          >
+            <div
+              class="Polaris-ResourceItem__Content"
+            >
+              <div
+                class="Polaris-Stack"
+              >
+                <div
+                  class="Polaris-Stack__Item"
+                >
+                  <div
+                    class="Polaris-SkeletonThumbnail Polaris-SkeletonThumbnail--sizeLarge"
+                  />
+                </div>
+                <div
+                  class="Polaris-Stack__Item Polaris-Stack__Item--fill"
+                >
+                  <div
+                    class="Polaris-TextContainer"
+                  >
+                    <div
+                      class="Polaris-SkeletonDisplayText__DisplayText Polaris-SkeletonDisplayText--sizeSmall"
+                    />
+                    <div
+                      class="Polaris-SkeletonBodyText__SkeletonBodyTextContainer"
+                    >
+                      <div
+                        class="Polaris-SkeletonBodyText"
+                      />
+                      <div
+                        class="Polaris-SkeletonBodyText"
+                      />
+                      <div
+                        class="Polaris-SkeletonBodyText"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+`;

@@ -1,10 +1,9 @@
 import React from "react";
 import { Banner } from "@shopify/polaris";
 
-// TODO: make this more user friendly and less scary
-const Error = (props) => (
-  <Banner status="critical" title={props.title}>
-    <p>{props.details}</p>
+const Error = ({ title, details }) => (
+  <Banner status="critical" title={title}>
+    <p>{details}</p>
   </Banner>
 );
 

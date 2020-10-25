@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header renders and matches snapshot 1`] = `
+exports[`Pagination renders and matches snapshot 1`] = `
 <nav
   aria-label="Pagination"
   class="Polaris-Pagination"

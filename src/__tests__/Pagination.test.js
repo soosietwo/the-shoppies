@@ -5,7 +5,7 @@ import { fireEvent } from "@testing-library/react/dist/pure";
 import api from "../api";
 import Store from "../store";
 
-describe("Header", () => {
+describe("Pagination", () => {
   it("renders and matches snapshot", () => {
     const mockInitialState = {
       currentPage: 1,

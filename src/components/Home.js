@@ -30,7 +30,7 @@ const Home = () => {
     []
   );
 
-  const { loading, data } = useQuery(NOMINEES_QUERY);
+  const { data } = useQuery(NOMINEES_QUERY);
 
   return (
     <Frame topBar={<Header toggleSheetActive={toggleSheetActive} />}>
