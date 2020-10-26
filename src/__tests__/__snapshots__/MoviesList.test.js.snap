@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MoviesList renders and matches snapshot 1`] = `
+<div
+  class="Polaris-ResourceList__ResourceListWrapper"
+>
+  <ul
+    aria-live="polite"
+    class="Polaris-ResourceList"
+  >
+    <div>
+      Test
+    </div>
+  </ul>
+</div>
+`;
+
+exports[`MoviesList renders empty state if no items are passed in 1`] = `
+<div
+  class="Polaris-ResourceList__ResourceListWrapper"
+>
+  <div
+    class="Polaris-Card"
+  >
+    <div
+      class="Polaris-EmptyState Polaris-EmptyState--withinContentContainer"
+    >
+      <div
+        class="Polaris-EmptyState__Section"
+      >
+        <div
+          class="Polaris-EmptyState__DetailsContainer"
+        >
+          <div
+            class="Polaris-EmptyState__Details"
+          >
+            <div
+              class="Polaris-TextContainer"
+            >
+              <p
+                class="Polaris-DisplayText Polaris-DisplayText--sizeSmall"
+              >
+                Test empty state
+              </p>
+              <div
+                class="Polaris-EmptyState__Content"
+              >
+                <p>
+                  Test empty state caption
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="Polaris-EmptyState__ImageContainer"
+        >
+          <img
+            alt=""
+            class="Polaris-EmptyState__Image"
+            role="presentation"
+            src="https://www.iconarchive.com/download/i99782/designbolts/free-multimedia/Film.ico"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

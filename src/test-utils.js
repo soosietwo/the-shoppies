@@ -21,11 +21,9 @@ Object.defineProperty(window, "scroll", { value: jest.fn(), writable: true });
 
 const AllTheProviders = ({ children }) => {
   return (
-    <div id="test-bed">
-      <AppProvider i18n={en}>
-        <Frame>{children}</Frame>
-      </AppProvider>
-    </div>
+    <AppProvider i18n={en}>
+      <Frame>{children}</Frame>
+    </AppProvider>
   );
 };
 

@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EmptyState renders and matches snapshot 1`] = `
+<div
+  class="Polaris-EmptyState Polaris-EmptyState--withinContentContainer"
+>
+  <div
+    class="Polaris-EmptyState__Section"
+  >
+    <div
+      class="Polaris-EmptyState__DetailsContainer"
+    >
+      <div
+        class="Polaris-EmptyState__Details"
+      >
+        <div
+          class="Polaris-TextContainer"
+        >
+          <p
+            class="Polaris-DisplayText Polaris-DisplayText--sizeSmall"
+          >
+            No movies found
+          </p>
+          <div
+            class="Polaris-EmptyState__Content"
+          >
+            <p>
+              Search to get started!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="Polaris-EmptyState__ImageContainer"
+    >
+      <img
+        alt=""
+        class="Polaris-EmptyState__Image"
+        role="presentation"
+        src="https://www.iconarchive.com/download/i99782/designbolts/free-multimedia/Film.ico"
+      />
+    </div>
+  </div>
+</div>
+`;
